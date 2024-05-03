@@ -1,12 +1,32 @@
 {% extends "FeedApp/base.html" %}
+{% load static %}
 
 {% block page_header %}
-    <div class="jumbotron">
-       <h1 class="display-3">Feed</h1>
-            <p class="lead">A Social Network where you can be you.
-            </p>
 
-            <a class="btn btn-lg btn-outline-primary" href="{% url 'users:register' %}"
-            role="button">Join Now &raquo;</a>
+<style>
+    .jumbotron {
+        background-image: url("images/98e298877dbd02be0bc82bcba1fb5038.gif");
+        background-size: cover;
+    }
+</style>
+
+
+<div class="jumbotron text-center">
+    <h1 class="display-3">Welcome to Feed</h1>
+    <p class="lead">A Social Network where you can be you.</p>
+    <hr class="my-4">
+    <p>Connect with friends, share moments, and explore new experiences.</p>
+    <a class="btn btn-lg btn-outline-primary" href="{% url 'users:register' %}" role="button">Join Now &raquo;</a>
+</div>
+
+<!-- Creative elements -->
+<div class="container-fluid text-center">
+    <!-- Background image -->
+    <!-- Colorful section -->
+    <div class="colorful-section">
+        <h2>Discover New Experiences</h2>
+        <p>Explore a vibrant community of like-minded individuals.</p>
     </div>
+    <!-- Other creative elements -->
+</div>
 {% endblock page_header %}

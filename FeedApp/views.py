@@ -18,7 +18,7 @@ def index(request):
 
 
 
-#@login_required
+@login_required
 def profile(request):
     profile = Profile.objects.filter(user=request.user)
 
@@ -90,7 +90,7 @@ def comments(request, post_id):
 
 
 
-
+@login_required
 def friendsfeed(request):
     comment_count_list = []
     like_count_list = []
@@ -107,7 +107,7 @@ def friendsfeed(request):
         post_to_like = request.POST.get('like')
         print(post_to_like)
         like_already_exists = Like.objects.filter(post_id=post_to_like, username=request.user)
-        if not like_already_exists():
+        if not like_already_exists.exists():
             Like.objects.create(post_id=post_to_like, username=request.user)
             return redirect('FeedApp:friendsfeed')
 
@@ -145,7 +145,7 @@ def friends(request):
     #Check to see which submit button was pressed (sending a friend request or accepting a friend request)
 
     #This is to process all send requests
-    if request.method == 'POST' and request.POST.get('send_requets'):
+    if request.method == 'POST' and request.POST.get('send_requests'):
         receivers = request.POST.getlist('send_requests')
         for receiver in receivers:
             receiver_profile = Profile.objects.get(id=receiver)
@@ -153,8 +153,8 @@ def friends(request):
         return redirect('FeedApp:friends')
 
     #This is to process all receive requests
-    if request.method == 'POST' and request.POST.get('receive_requets'):
-        senders = request.POST.getlist('receive_requets')
+    if request.method == 'POST' and request.POST.get('receive_requests'):
+        senders = request.POST.getlist('receive_requests')
         for sender in senders:
             #Update the relationship model for the sender to status 'accepted'
             Relationship.objects.filter(id=sender).update(status='accepted')
